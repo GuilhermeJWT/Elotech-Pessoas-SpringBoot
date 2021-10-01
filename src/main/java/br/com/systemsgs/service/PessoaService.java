@@ -1,5 +1,7 @@
 package br.com.systemsgs.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	@Transactional
 	public ModelPessoas salvar (ModelPessoas modelPessoas){
 		return pessoaRepository.save(modelPessoas);
 	}

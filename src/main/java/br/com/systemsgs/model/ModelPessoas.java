@@ -8,11 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Table(name = "pessoas")
@@ -24,22 +19,12 @@ public class ModelPessoas implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank(message = "Nome não pode estar em Branco!")
-	@NotEmpty(message = "Nome não pode estar Vazio!")
-	@NotNull(message = "Nome não pode estar Nulo!")
 	private String nome;
 	
-	@NotBlank(message = "Cpf não pode estar em Branco!")
-	@NotEmpty(message = "Cpf não pode estar Vazio!")
-	@NotNull(message = "Cpf não pode estar Nulo!")
-	@CPF(message = "Informe um Cpf Válido!")
 	private String cpf;
-	
-	@NotBlank(message = "Data de Nascimento não pode estar em Branco!")
-	@NotEmpty(message = "Data de Nascimento não pode estar Vazio!")
-	@NotNull(message = "Data de Nascimento não pode estar Nulo!")
-	private Date data_nascimento;
 
+	private Date dataNascimento;
+	
 	public Long getId() {
 		return id;
 	}
@@ -63,13 +48,13 @@ public class ModelPessoas implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	public Date getData_nascimento() {
-		return data_nascimento;
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
-
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@Override
