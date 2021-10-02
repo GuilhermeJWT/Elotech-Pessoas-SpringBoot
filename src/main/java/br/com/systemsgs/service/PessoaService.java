@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.systemsgs.exception.RecursoNaoEncontradoException;
 import br.com.systemsgs.model.ModelPessoas;
 import br.com.systemsgs.repository.PessoaRepository;
 
@@ -35,6 +36,17 @@ public class PessoaService {
 	public ResponseEntity<?> deletePessoa(Long id) {
 		pessoaRepository.deleteById(id);
 		return ResponseEntity.ok().build();
+	}
+
+	@Transactional
+	public ModelPessoas atualizarPessoa(ModelPessoas modelPessoas) {
+		ModelPessoas pessoas = pessoaRepository.findById(modelPessoas.getId()).orElseThrow(() -> new RecursoNaoEncontradoException());
+		
+		pessoas.setCpf(modelPessoas.getCpf());
+		pessoas.setNome(modelPessoas.getNome());
+		pessoas.setDataNascimento(modelPessoas.getDataNascimento());
+		
+		return pessoaRepository.save(pessoas);
 	}
 
 }

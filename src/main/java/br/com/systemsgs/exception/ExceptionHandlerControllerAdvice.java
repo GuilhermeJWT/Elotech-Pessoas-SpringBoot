@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
 	
+	@ExceptionHandler(RecursoNaoEncontradoException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public RestApiErrorsException recursoNaoEncontradoException(RecursoNaoEncontradoException recursoNaoEncontrado) {
+		return new RestApiErrorsException(recursoNaoEncontrado.getMessage());
+	}
+	
 	@ExceptionHandler(GenerationExceptionClass.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public RestApiErrorsException tratamentoException(GenerationExceptionClass generationExceptionClass) {

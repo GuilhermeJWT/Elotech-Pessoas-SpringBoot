@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.systemsgs.exception.RecursoNaoEncontradoException;
 import br.com.systemsgs.model.ModelPessoas;
 import br.com.systemsgs.service.PessoaService;
 
@@ -38,6 +40,12 @@ public class PessoaController {
 	@GetMapping(value = "/pesquisar/{id}")
 	public Optional<ModelPessoas> pesquisaPorId(@PathVariable Long id) {
 		return pessoaService.pesquisaPorId(id);
+	}
+	
+	@PutMapping(value = "/atualizar")
+	public ModelPessoas atualizarPessoa(@RequestBody ModelPessoas modelPessoas) {
+		//ModelPessoas pessoa = pessoaService.pesquisaPorId(modelPessoas.getId()).orElseThrow(() -> new  RecursoNaoEncontradoException());
+		return pessoaService.atualizarPessoa(modelPessoas);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
