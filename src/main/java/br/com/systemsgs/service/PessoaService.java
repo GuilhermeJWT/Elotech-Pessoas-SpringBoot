@@ -1,8 +1,12 @@
 package br.com.systemsgs.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.systemsgs.model.ModelPessoas;
@@ -17,6 +21,20 @@ public class PessoaService {
 	@Transactional
 	public ModelPessoas salvar (ModelPessoas modelPessoas){
 		return pessoaRepository.save(modelPessoas);
+	}
+
+	public List<ModelPessoas> retornaListaPessoas() {
+		return pessoaRepository.findAll();
+	}
+
+	public Optional<ModelPessoas> pesquisaPorId(Long id) {
+		return pessoaRepository.findById(id);
+	}
+
+	@Transactional
+	public ResponseEntity<?> deletePessoa(Long id) {
+		pessoaRepository.deleteById(id);
+		return ResponseEntity.ok().build();
 	}
 
 }
