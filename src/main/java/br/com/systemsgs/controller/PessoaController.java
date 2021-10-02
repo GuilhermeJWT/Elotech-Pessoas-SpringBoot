@@ -1,7 +1,6 @@
 package br.com.systemsgs.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.systemsgs.exception.RecursoNaoEncontradoException;
-import br.com.systemsgs.model.ModelPessoas;
+import br.com.systemsgs.dto.ModelPessoasDTO;
 import br.com.systemsgs.service.PessoaService;
 
 @RestController
@@ -28,28 +26,28 @@ public class PessoaController {
 	private PessoaService pessoaService;
 	
 	@PostMapping(value = "/salvar")
-	public ModelPessoas salvaPessoa(@RequestBody @Valid ModelPessoas modelPessoas){
-		return pessoaService.salvar(modelPessoas);
+	public ModelPessoasDTO salvaPessoa(@RequestBody @Valid ModelPessoasDTO modelPessoasDTO){
+		return pessoaService.salvar(modelPessoasDTO);
 	}
 	
 	@GetMapping(value = "/listarTodos")
-	public List<ModelPessoas> listaPessoas(){
+	public List<ModelPessoasDTO> listaPessoas(){
 		return pessoaService.retornaListaPessoas();
 	}
 	
 	@GetMapping(value = "/pesquisar/{id}")
-	public Optional<ModelPessoas> pesquisaPorId(@PathVariable Long id) {
+	public ModelPessoasDTO pesquisaPorId(@PathVariable Long id) {
 		return pessoaService.pesquisaPorId(id);
 	}
 	
 	@PutMapping(value = "/atualizar")
-	public ModelPessoas atualizarPessoa(@RequestBody ModelPessoas modelPessoas) {
-		//ModelPessoas pessoa = pessoaService.pesquisaPorId(modelPessoas.getId()).orElseThrow(() -> new  RecursoNaoEncontradoException());
-		return pessoaService.atualizarPessoa(modelPessoas);
+	public ModelPessoasDTO atualizarPessoa(@RequestBody ModelPessoasDTO modelPessoasDTO) {
+		//ModelPessoasDTO pessoa = pessoaService.pesquisaPorId(modelPessoasDTO.getId()).orElseThrow(() -> new  RecursoNaoEncontradoException());
+		return pessoaService.atualizarPessoa(modelPessoasDTO);
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<ModelPessoas> deletePessoa(@PathVariable Long id){
+	public ResponseEntity<ModelPessoasDTO> deletePessoa(@PathVariable Long id){
 		pessoaService.deletePessoa(id);
 		return ResponseEntity.ok().build();
 	}

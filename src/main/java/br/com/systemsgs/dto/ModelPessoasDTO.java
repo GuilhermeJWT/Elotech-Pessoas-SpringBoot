@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ModelPessoasDTO {
 	
+	private Long id;
+	
 	@NotBlank(message = "Nome não pode estar em Branco!")
 	private String nome;
 	
@@ -27,6 +29,14 @@ public class ModelPessoasDTO {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
