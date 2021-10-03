@@ -1,7 +1,6 @@
 package br.com.systemsgs.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,8 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import br.com.systemsgs.model.ModelContatos;
 
 public class ModelPessoasDTO {
 	
@@ -43,16 +40,6 @@ public class ModelPessoasDTO {
 	@NotBlank(message = "E-Mail do Contato não pode estar em Branco!")
 	@Email(message = "E-Mail deve ser Válido!")
 	private String email;
-	
-	private List<ModelContatos> contatos;
-	
-	public List<ModelContatos> getContatos() {
-		return contatos;
-	}
-	
-	public void setContatos(List<ModelContatos> contatos) {
-		this.contatos = contatos;
-	}
 	
 	public Long getId() {
 		return id;
