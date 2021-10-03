@@ -43,7 +43,6 @@ public class PessoaController {
 	
 	@PutMapping(value = "/atualizar")
 	public ModelPessoasDTO atualizarPessoa(@RequestBody ModelPessoasDTO modelPessoasDTO) {
-		//ModelPessoasDTO pessoa = pessoaService.pesquisaPorId(modelPessoasDTO.getId()).orElseThrow(() -> new  RecursoNaoEncontradoException());
 		return pessoaService.atualizarPessoa(modelPessoasDTO);
 	}
 	

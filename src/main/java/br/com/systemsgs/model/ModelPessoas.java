@@ -47,6 +47,7 @@ public class ModelPessoas implements Serializable{
 	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	
+	@NotNull(message = "Informe os Dados do Contato!")
 	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ModelContatos> contatos = new ArrayList<ModelContatos>();
 	
