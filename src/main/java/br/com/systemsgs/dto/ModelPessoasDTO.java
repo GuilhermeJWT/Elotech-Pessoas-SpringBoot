@@ -14,6 +14,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.systemsgs.model.ModelContatos;
+
 public class ModelPessoasDTO {
 	
 	private Long id;
@@ -40,6 +42,17 @@ public class ModelPessoasDTO {
 	@NotBlank(message = "E-Mail do Contato não pode estar em Branco!")
 	@Email(message = "E-Mail deve ser Válido!")
 	private String email;
+	
+	@NotNull(message = "Contatos deve ser Informado!")
+	private ModelContatos contatos;
+	
+	public ModelContatos getContatos() {
+		return contatos;
+	}
+	
+	public void setContatos(ModelContatos contatos) {
+		this.contatos = contatos;
+	}
 	
 	public Long getId() {
 		return id;

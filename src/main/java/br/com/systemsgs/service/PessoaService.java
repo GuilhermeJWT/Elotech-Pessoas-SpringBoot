@@ -5,12 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.systemsgs.config.DozerConverter;
 import br.com.systemsgs.dto.ModelPessoasDTO;
-import br.com.systemsgs.exception.RecursoNaoEncontradoException;
+import br.com.systemsgs.exception.PessoaNaoEncontradaException;
 import br.com.systemsgs.model.ModelPessoas;
 import br.com.systemsgs.repository.PessoaRepository;
 
@@ -37,21 +38,22 @@ public class PessoaService {
 		return DozerConverter.converteList(pessoaRepository.findAll(), ModelPessoasDTO.class);
 	}
 
-	public ModelPessoasDTO pesquisaPorId(Long id) {
-		ModelPessoas pessoasEntity = pessoaRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException());
-		
-		return DozerConverter.converteEntidade(pessoasEntity, ModelPessoasDTO.class);
+	public ResponseEntity<ModelPessoasDTO> pesquisaPorId(Long id) {
+		ModelPessoas pessoasEntity = pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
+		ModelPessoasDTO pessoaConvertida = DozerConverter.converteEntidade(pessoasEntity, ModelPessoasDTO.class);
+		return new ResponseEntity<ModelPessoasDTO>(pessoaConvertida, HttpStatus.OK);
 	}
 
 	@Transactional
-	public ResponseEntity<?> deletePessoa(Long id) {
-		pessoaRepository.deleteById(id);
+	public ResponseEntity<ModelPessoas> deletePessoa(Long id) {
+		pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
+		
 		return ResponseEntity.ok().build();
 	}
 
 	@Transactional
 	public ModelPessoasDTO atualizarPessoa(ModelPessoasDTO modelPessoasDTO) {
-		ModelPessoas pessoasEntity = pessoaRepository.findById(modelPessoasDTO.getId()).orElseThrow(() -> new RecursoNaoEncontradoException());
+		ModelPessoas pessoasEntity = pessoaRepository.findById(modelPessoasDTO.getId()).orElseThrow(() -> new PessoaNaoEncontradaException());
 		
 		pessoasEntity.setCpf(modelPessoasDTO.getCpf());
 		pessoasEntity.setNome(modelPessoasDTO.getNome());

@@ -26,6 +26,14 @@ public class PessoaController {
 	@Autowired
 	private PessoaService pessoaService;
 	
+	@DeleteMapping(value = "/delete/{id}")
+	public String delete(@PathVariable Long id) {
+		pessoaService.deletePessoa(id);
+		
+		return "Pessoa Deletada com Sucesso!!!";
+	}
+	
+	/*
 	@PostMapping(value = "/salvar")
 	public ModelPessoasDTO salvaPessoa(@RequestBody @Valid ModelPessoasDTO modelPessoasDTO){
 		return pessoaService.salvar(modelPessoasDTO);
@@ -37,7 +45,7 @@ public class PessoaController {
 	}
 	
 	@GetMapping(value = "/pesquisar/{id}")
-	public ModelPessoasDTO pesquisaPorId(@PathVariable Long id) {
+	public ResponseEntity<ModelPessoasDTO> pesquisaPorId(@PathVariable Long id) {
 		return pessoaService.pesquisaPorId(id);
 	}
 	
@@ -52,6 +60,8 @@ public class PessoaController {
 		return ResponseEntity.ok().build();
 	}
 	
+	
+	*/
 	@PostMapping(value = "/salvaPessoas")
 	public ModelPessoas salvaPessoas2(@RequestBody @Valid ModelPessoas modelPessoas) {
 		

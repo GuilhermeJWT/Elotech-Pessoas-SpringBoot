@@ -48,7 +48,7 @@ public class ModelPessoas implements Serializable{
 	private Date dataNascimento;
 	
 	@NotNull(message = "Informe os Dados do Contato!")
-	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<ModelContatos> contatos = new ArrayList<ModelContatos>();
 	
 	public Long getId() {
