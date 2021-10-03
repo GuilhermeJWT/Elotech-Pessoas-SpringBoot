@@ -1,12 +1,17 @@
 package br.com.systemsgs.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +47,9 @@ public class ModelPessoas implements Serializable{
 	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	
+	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ModelContatos> contatos = new ArrayList<ModelContatos>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -72,6 +80,14 @@ public class ModelPessoas implements Serializable{
 	
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	public List<ModelContatos> getContatos() {
+		return contatos;
+	}
+	
+	public void setContatos(List<ModelContatos> contatos) {
+		this.contatos = contatos;
 	}
 
 	@Override

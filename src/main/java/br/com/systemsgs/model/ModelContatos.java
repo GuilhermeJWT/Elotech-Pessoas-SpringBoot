@@ -6,8 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.ForeignKey;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "contatos")
@@ -27,6 +32,11 @@ public class ModelContatos implements Serializable{
 	
 	@NotBlank(message = "E-Mail do Contato não pode estar em Branco!")
 	private String email;
+	
+	@JsonIgnore
+	@ForeignKey(name = "pessoa_id")
+	@ManyToOne(optional = false)
+	private ModelPessoas pessoas;
 
 	public Long getId() {
 		return id;
@@ -58,6 +68,14 @@ public class ModelContatos implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public ModelPessoas getPessoas() {
+		return pessoas;
+	}
+	
+	public void setPessoas(ModelPessoas pessoas) {
+		this.pessoas = pessoas;
 	}
 
 	@Override
