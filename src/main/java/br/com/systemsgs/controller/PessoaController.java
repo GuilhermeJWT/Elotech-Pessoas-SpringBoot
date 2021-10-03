@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.systemsgs.dto.ModelPessoasDTO;
+import br.com.systemsgs.model.ModelPessoas;
 import br.com.systemsgs.service.PessoaService;
 
 @RestController
@@ -50,6 +51,16 @@ public class PessoaController {
 	public ResponseEntity<ModelPessoasDTO> deletePessoa(@PathVariable Long id){
 		pessoaService.deletePessoa(id);
 		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping(value = "/salvaPessoas")
+	public ModelPessoas salvaPessoas2(@RequestBody @Valid ModelPessoas modelPessoas) {
+		
+		for (int posicao = 0; posicao < modelPessoas.getContatos().size(); posicao++) {
+			modelPessoas.getContatos().get(posicao).setPessoas(modelPessoas);
+		}
+		
+		return pessoaService.salvar2(modelPessoas);
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.ForeignKey;
@@ -31,6 +32,7 @@ public class ModelContatos implements Serializable{
 	private String telefone;
 	
 	@NotBlank(message = "E-Mail do Contato não pode estar em Branco!")
+	@Email(message = "E-Mail deve ser Válido!")
 	private String email;
 	
 	@JsonIgnore

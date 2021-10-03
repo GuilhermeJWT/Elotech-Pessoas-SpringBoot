@@ -21,11 +21,16 @@ public class PessoaService {
 	private PessoaRepository pessoaRepository;
 	
 	@Transactional
-	public ModelPessoasDTO salvar (ModelPessoasDTO modelPessoasDTO){
+	public ModelPessoasDTO salvar(ModelPessoasDTO modelPessoasDTO){
 		ModelPessoas pessoasEntity = DozerConverter.converteEntidade(modelPessoasDTO, ModelPessoas.class);
 		ModelPessoasDTO pessoaDTO = DozerConverter.converteEntidade(pessoaRepository.save(pessoasEntity), ModelPessoasDTO.class);
 		
 		return pessoaDTO;
+	}
+	
+	@Transactional
+	public ModelPessoas salvar2(ModelPessoas modelPessoas) {
+		return pessoaRepository.save(modelPessoas);
 	}
 
 	public List<ModelPessoasDTO> retornaListaPessoas() {
