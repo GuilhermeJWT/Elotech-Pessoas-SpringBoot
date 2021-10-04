@@ -1,6 +1,8 @@
 <h2>Projeto Rodando na porta 8080, Java 8, Postgres</h2>
 
-<h2>Documentação das Api: http://localhost:8080/swagger-ui.html#/pessoa-controller</h2>
+<h2>Documentação das Api: </h2>
+ URL de Produção: https://elotech-pessoas.herokuapp.com/swagger-ui.html#/pessoa-controller </br> 
+ URL Local: http://localhost:8080/swagger-ui.html#/pessoa-controller
 <img src="https://user-images.githubusercontent.com/63434009/135782573-4840e3ff-32c5-4c5b-a074-12f7a6240add.PNG">
 
 <h2>Salvando a Pessoa: </h2>
