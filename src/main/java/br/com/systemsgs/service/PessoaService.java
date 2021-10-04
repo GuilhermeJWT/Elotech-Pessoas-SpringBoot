@@ -2,10 +2,7 @@ package br.com.systemsgs.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.systemsgs.config.DozerConverter;
@@ -20,46 +17,41 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	@Transactional
-	public ModelPessoasDTO salvar(ModelPessoasDTO modelPessoasDTO){
+	public ModelPessoasDTO salvar(ModelPessoasDTO modelPessoasDTO) {
 		ModelPessoas pessoasEntity = DozerConverter.converteEntidade(modelPessoasDTO, ModelPessoas.class);
-		ModelPessoasDTO pessoaDTO = DozerConverter.converteEntidade(pessoaRepository.save(pessoasEntity), ModelPessoasDTO.class);
+		ModelPessoasDTO pessoaConvertida = DozerConverter.converteEntidade(pessoaRepository.save(pessoasEntity), ModelPessoasDTO.class);
 		
-		return pessoaDTO;
+		return pessoaConvertida;
 	}
 	
-	@Transactional
 	public ModelPessoas salvar2(ModelPessoas modelPessoas) {
 		return pessoaRepository.save(modelPessoas);
 	}
-
-	public List<ModelPessoasDTO> retornaListaPessoas() {
+	
+	public List<ModelPessoasDTO> findAll() {
 		return DozerConverter.converteList(pessoaRepository.findAll(), ModelPessoasDTO.class);
-	}
-
-	public ModelPessoasDTO pesquisaPorId(Long id) {
+	}	
+	
+	public ModelPessoasDTO findById(Long id) {
 		ModelPessoas pessoasEntity = pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
 		
 		return DozerConverter.converteEntidade(pessoasEntity, ModelPessoasDTO.class);
 	}
-
-	@Transactional
-	public ResponseEntity<?> deletePessoa(Long id) {
-		pessoaRepository.deleteById(id);
-		return ResponseEntity.ok().build();
-	}
-
-	@Transactional
-	public ModelPessoasDTO atualizarPessoa(ModelPessoasDTO modelPessoasDTO) {
+		
+	public ModelPessoasDTO atualizar(ModelPessoasDTO modelPessoasDTO) {
 		ModelPessoas pessoasEntity = pessoaRepository.findById(modelPessoasDTO.getId()).orElseThrow(() -> new PessoaNaoEncontradaException());
 		
 		pessoasEntity.setCpf(modelPessoasDTO.getCpf());
 		pessoasEntity.setNome(modelPessoasDTO.getNome());
 		pessoasEntity.setDataNascimento(modelPessoasDTO.getDataNascimento());
 		
-		ModelPessoasDTO pessoaDTO = DozerConverter.converteEntidade(pessoaRepository.save(pessoasEntity), ModelPessoasDTO.class);
-		
-		return pessoaDTO;
+		ModelPessoasDTO pessoaConvertida = DozerConverter.converteEntidade(pessoaRepository.save(pessoasEntity), ModelPessoasDTO.class);
+		return pessoaConvertida;
+	}	
+	
+	public void delete(Long id) {
+		ModelPessoas pessoaEntity = pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
+		pessoaRepository.delete(pessoaEntity);
 	}
 
 }
