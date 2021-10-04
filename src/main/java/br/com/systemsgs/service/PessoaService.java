@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -38,16 +37,15 @@ public class PessoaService {
 		return DozerConverter.converteList(pessoaRepository.findAll(), ModelPessoasDTO.class);
 	}
 
-	public ResponseEntity<ModelPessoasDTO> pesquisaPorId(Long id) {
+	public ModelPessoasDTO pesquisaPorId(Long id) {
 		ModelPessoas pessoasEntity = pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
-		ModelPessoasDTO pessoaConvertida = DozerConverter.converteEntidade(pessoasEntity, ModelPessoasDTO.class);
-		return new ResponseEntity<ModelPessoasDTO>(pessoaConvertida, HttpStatus.OK);
+		
+		return DozerConverter.converteEntidade(pessoasEntity, ModelPessoasDTO.class);
 	}
 
 	@Transactional
-	public ResponseEntity<ModelPessoas> deletePessoa(Long id) {
-		pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
-		
+	public ResponseEntity<?> deletePessoa(Long id) {
+		pessoaRepository.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
 

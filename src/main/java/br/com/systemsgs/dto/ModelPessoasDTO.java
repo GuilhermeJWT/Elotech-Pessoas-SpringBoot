@@ -1,6 +1,7 @@
 package br.com.systemsgs.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,14 +44,13 @@ public class ModelPessoasDTO {
 	@Email(message = "E-Mail deve ser Válido!")
 	private String email;
 	
-	@NotNull(message = "Contatos deve ser Informado!")
-	private ModelContatos contatos;
+	private List<ModelContatos> contatos;
 	
-	public ModelContatos getContatos() {
+	public List<ModelContatos> getContatos() {
 		return contatos;
 	}
 	
-	public void setContatos(ModelContatos contatos) {
+	public void setContatos(List<ModelContatos> contatos) {
 		this.contatos = contatos;
 	}
 	
@@ -84,6 +84,11 @@ public class ModelPessoasDTO {
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 	
 }
