@@ -1,4 +1,4 @@
-<h2>Projeto Rodando na pota 8080, Java 8, Postgres</h2>
+<h2>Projeto Rodando na porta 8080, Java 8, Postgres</h2>
 
 <h2>Documentação das Api: http://localhost:8080/swagger-ui.html#/pessoa-controller</h2>
 <img src="https://user-images.githubusercontent.com/63434009/135782573-4840e3ff-32c5-4c5b-a074-12f7a6240add.PNG">
