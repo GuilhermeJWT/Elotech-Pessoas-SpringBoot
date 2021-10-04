@@ -30,8 +30,8 @@ public class PessoaService {
 	
 	public List<ModelPessoasDTO> findAll() {
 		return DozerConverter.converteList(pessoaRepository.findAll(), ModelPessoasDTO.class);
-	}	
-	
+	}
+
 	public ModelPessoasDTO findById(Long id) {
 		ModelPessoas pessoasEntity = pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException());
 		
