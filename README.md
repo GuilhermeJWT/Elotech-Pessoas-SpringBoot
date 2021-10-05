@@ -13,5 +13,3 @@
 
 <h2>Validação quando não existe ID (Pessoa): </h2>
 <img src="https://user-images.githubusercontent.com/63434009/135782012-2a49d126-78c9-49d1-9e2e-7d03e0662080.PNG">
-
-<h2>*** Faltou implementar os Testes Unitários e a Paginação no findAll ***</h2>
